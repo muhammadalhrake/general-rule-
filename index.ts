@@ -5,22 +5,29 @@ function between(min: number, max: number) {
   return random.int(min, max);
 }
 let possibility = new Array();
-function generateNew(count: number, digits: string[], digits2: string[]) {
+const generateQuestion = (
+  count: number,
+  digits: string[],
+  digits2: string[]
+) => {
   let generation = new Array();
-  for (let i = 0; i < count; ) {
-    for (let j = 0; j < digits.length && i < count; j++) {
-      for (let k = 0; k < digits2.length && i < count; k++) {
-        const digit = +digits[j];
-        const digit2 = +digits2[k];
+  while (count > 0) {
+    digits.map(indexDigigt1 =>
+      digits2.map(indexDigigt2 => {
+        const digit = +indexDigigt1;
+        const digit2 = +indexDigigt2;
         let GG = generate(possibility, digit, digit2);
         generation.push(GG);
-        i++;
-      }
-    }
+        count--;
+      })
+    );
   }
   return generation;
-}
+};
 const generate = (arr: string[], digit: number, digit2: number) => {
+  let question = {
+    copyarr: arr
+  };
   let fN = between(
     +new Array(digit).fill(1).join(''),
     +new Array(digit).fill(9).join('')
@@ -30,10 +37,14 @@ const generate = (arr: string[], digit: number, digit2: number) => {
     +new Array(digit2).fill(9).join('')
   );
   let ourNumber = fN.toString() + '*' + sN.toString();
-  (arr.indexOf(ourNumber) == -1)?arr.push(ourNumber) :generate(arr, digit, digit2)
-  return ourNumber
+  if (arr.indexOf(ourNumber) == -1) {
+    arr.push(ourNumber);
+    return ourNumber;
+  } else {
+    return generate(arr, digit, digit2);
+  }
 };
-//console.log(generateNew(40, ['1'], ['1']));
+//console.log(generateQuestion(40, ['1'], ['1']));
 
 //console.log(generate([],3))
 // Write TypeScript code!
