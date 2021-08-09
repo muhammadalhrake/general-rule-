@@ -5,11 +5,7 @@ function between(min: number, max: number) {
   return random.int(min, max);
 }
 let possibility = new Array();
-const generateQuestion = (
-  count: number,
-  digits: string[],
-  digits2: string[]
-) => {
+const generateQuestion = (count: number,digits: string[],digits2: string[]) => {
   let generation = new Array();
   while (count > 0) {
     digits.map(indexDigigt1 =>
