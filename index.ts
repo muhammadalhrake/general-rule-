@@ -30,14 +30,10 @@ const generate = (arr: string[], digit: number, digit2: number) => {
     +new Array(digit2).fill(9).join('')
   );
   let ourNumber = fN.toString() + '*' + sN.toString();
-  if (arr.indexOf(ourNumber) == -1) {
-    arr.push(ourNumber);
-    return ourNumber;
-  } else {
-    return generate(arr, digit, digit2);
-  }
+  (arr.indexOf(ourNumber) == -1)?arr.push(ourNumber) :generate(arr, digit, digit2)
+  return ourNumber
 };
-//console.log(generateNew(40, ['2', '5'], ['2', '4']));
+//console.log(generateNew(40, ['1'], ['1']));
 
 //console.log(generate([],3))
 // Write TypeScript code!
