@@ -37,7 +37,7 @@ const generate = (arr: string[], digit: number, digit2: number) => {
     return generate(arr, digit, digit2);
   }
 };
-console.log(generateNew(40, ['2', '5'], ['2', '4']));
+//console.log(generateNew(40, ['2', '5'], ['2', '4']));
 
 //console.log(generate([],3))
 // Write TypeScript code!
