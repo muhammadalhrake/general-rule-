@@ -1,11 +1,16 @@
 // Import stylesheets
 import './style.css';
 import random from 'random';
+import { ansArray } from './general-answer';
 function between(min: number, max: number) {
   return random.int(min, max);
 }
 let possibility = new Array();
-const generateQuestion = (count: number,digits: string[],digits2: string[]) => {
+const generateQuestion = (
+  count: number,
+  digits: string[],
+  digits2: string[]
+) => {
   let generation = new Array();
   while (count > 0) {
     digits.map(indexDigigt1 =>
@@ -13,7 +18,9 @@ const generateQuestion = (count: number,digits: string[],digits2: string[]) => {
         const digit = +indexDigigt1;
         const digit2 = +indexDigigt2;
         let GG = generate(possibility, digit, digit2);
-        generation.push(GG);
+        const question = GG.generate;
+        possibility = GG.copyarr;
+        generation.push(question);
         count--;
       })
     );
@@ -22,7 +29,12 @@ const generateQuestion = (count: number,digits: string[],digits2: string[]) => {
 };
 const generate = (arr: string[], digit: number, digit2: number) => {
   let question = {
-    copyarr: arr
+    copyarr: arr,
+    generate: {
+      answers: [5, 5, 5, 5],
+      firstNumber: 5,
+      secondNumber: 5
+    }
   };
   let fN = between(
     +new Array(digit).fill(1).join(''),
@@ -34,13 +46,16 @@ const generate = (arr: string[], digit: number, digit2: number) => {
   );
   let ourNumber = fN.toString() + '*' + sN.toString();
   if (arr.indexOf(ourNumber) == -1) {
-    arr.push(ourNumber);
-    return ourNumber;
+    question.copyarr.push(ourNumber);
+    question.generate.answers = ansArray(fN, sN);
+    question.generate.firstNumber = fN;
+    question.generate.secondNumber = sN;
+    return question;
   } else {
     return generate(arr, digit, digit2);
   }
 };
-//console.log(generateQuestion(40, ['1'], ['1']));
+//console.log(generateQuestion(40, ['1'], ['1','5']));
 
 //console.log(generate([],3))
 // Write TypeScript code!
