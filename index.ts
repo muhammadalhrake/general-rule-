@@ -55,8 +55,21 @@ const generate = (arr: string[], digit: number, digit2: number) => {
     return generate(arr, digit, digit2);
   }
 };
-//console.log(generateQuestion(40, ['1'], ['1','5']));
-
+const check = possibility => {
+  let checked;
+  console.log(possibility.indexOf(possibility[0])==-1)
+  for (let i = 0; i < possibility.length; i++) {
+    let newArr=possibility.delete(i)
+    if (!(possibility.indexOf(possibility[i]) == -1)) {
+      checked = true;
+    } else {
+      checked = false;
+    }
+    //console.log(checked)
+  }
+  return checked;
+};
+console.log(generateQuestion(40, ['1'], ['1']) ,check(possibility));
 //console.log(generate([],3))
 // Write TypeScript code!
 const appDiv: HTMLElement = document.getElementById('app');
